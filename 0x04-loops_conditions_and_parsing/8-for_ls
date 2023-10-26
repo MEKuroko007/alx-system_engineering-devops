@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # This script is displaying The content of the current directory
-command=$(ls .)
+command=$(ls)
 for dir in $command
 do
-    echo "$dir"
+    echo "$dir" | cut -d '-' -f 2
 done
+
