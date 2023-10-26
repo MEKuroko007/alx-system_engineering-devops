@@ -2,12 +2,12 @@
 # read from a file with description
 
 
-while IFS=':' read -r USERNAME PASSWORD USER_ID  GROUP_ID  info HOME_DIRECTORY  SHELL;
+while IFS=':' read -r USERNAME PASSWORD USER_ID  GROUP_ID  INFO HOME_DIRECTORY  SHELL;
 do
     echo "The user $USERNAME is part of the $GROUP_ID  gang,"\
   "lives in $HOME_DIRECTORY  and rides $SHELL."\
   "$USER_ID's place is protected by the passcode $PASSWORD,"\
-  "more info about the user here: $info"
-done < /etc/passwd
+  "more info about the user here: $INFO"
+done "< /etc/passwd"
 
 
