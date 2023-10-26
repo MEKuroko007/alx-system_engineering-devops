@@ -3,6 +3,6 @@
 command=$(ls)
 for dir in $command
 do
-    echo "$dir" | cut -d '-' -f 2
+    echo "$dir" | cut -d '-' -f2
 done
 
