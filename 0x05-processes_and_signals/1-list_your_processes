@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# list all processs
+
+ps -aux
