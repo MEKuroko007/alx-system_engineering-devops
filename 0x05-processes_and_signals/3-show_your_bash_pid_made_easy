@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# show only one word with pid
+
+pgrep bash -l
