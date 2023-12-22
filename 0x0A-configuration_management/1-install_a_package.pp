@@ -2,9 +2,11 @@
 
 # Install a specific version of Python 3.8
 package { 'python3.8':
-  ensure   => '3.8.12',  # Adjust version accordingly
+  ensure   => '3.8.18-1+jammy1',
   provider => 'apt',
+  install_options => ['--allow-downgrades'],
 }
+
 
 # Install pip for Python 3
 package { 'python3-pip':
