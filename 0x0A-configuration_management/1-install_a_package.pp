@@ -1,38 +1,24 @@
 #!/usr/bin/pup
 # Install an especific version of flask 2.1.0
 
-
-
-exec { 'apt-update':
-  command => '/usr/bin/apt-get update',
-  path    => ['/usr/bin'],
-  require => Exec['add-apt-repository'],
-}
-
 package { 'python3.8':
   ensure   => '3.8.10',
   provider => 'apt',
 }
 
-package { 'software-properties-common':
-  ensure   => 'installed',
-  require  => Package['python3.8'],
-}
-exec { 'add-apt-repository':
-  command => '/usr/bin/add-apt-repository ppa:deadsnakes/ppa',
+exec { 'check-pip3':
+  command => '/usr/bin/which pip3',
   path    => ['/usr/bin'],
-  user    => 'root',
-  require => Package['software-properties-common'],
-}
-package { 'python3.8-dev':
-  ensure   => 'installed',
-  require  => Exec['apt-update'],
+  unless  => '/usr/bin/test -x /usr/bin/pip3',
 }
 
-package { 'python3.8':
-  ensure   => 'installed',
-  require  => Package['python3.8-dev'],
+package { 'python3-pip':
+  ensure  => 'installed',
+  provider => 'apt',
+  require => Exec['check-pip3'],
 }
+
+
 package { 'Flask':
   ensure   => '2.1.0',
   provider => 'pip3',
