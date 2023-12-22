@@ -1,11 +1,6 @@
 #!/usr/bin/pup
+#install flask 2.1.0
 
-# Install a specific version of Python 3.8
-package { 'python3.8':
-  ensure   => '3.8.18-1+jammy1',
-  provider => 'apt',
-  install_options => ['--allow-downgrades'],
-}
 
 
 # Install pip for Python 3
