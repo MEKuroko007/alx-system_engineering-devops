@@ -1,31 +1,24 @@
 #!/usr/bin/pup
-# Install an especific version of flask (2.1.0)
-# 1-install_a_package.pp
+# install_packages.pp
 
-package { 'python3':
-  ensure => installed,
+# Install Python 3.8.10
+class { 'python':
+  version => '3.8.10',
 }
 
-package { 'python3-pip':
-  ensure => installed,
-  require => Package['python3'],
-}
-
+# Install Flask version 2.1.0 using pip3
 package { 'Flask':
-  ensure   => '2.1.0',
-  provider => 'pip3',
-  require  => Package['python3-pip'],
+  ensure          => '2.1.0',
+  provider        => 'pip3',
 }
 
+# Install Werkzeug version 2.1.1 using pip3
 package { 'Werkzeug':
-  ensure   => '2.1.1',
-  provider => 'pip3',
-  require  => Package['python3-pip'],
+  ensure          => '2.1.1',
+  provider        => 'pip3',
 }
 
-exec { 'install_werkzeug':
-  command => 'pip3 install Werkzeug==2.1.1',
-  unless  => 'pip3 show Werkzeug | grep Version | grep -q 2.1.1',
-  require => Package['python3-pip'],
+# Notify the user about the installation
+notify { 'Packages installed':
+  message => 'Python 3.8.10, Flask 2.1.0, and Werkzeug 2.1.1 have been installed.',
 }
-
