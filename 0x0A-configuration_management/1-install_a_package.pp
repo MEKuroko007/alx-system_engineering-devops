@@ -1,24 +1,21 @@
 #!/usr/bin/pup
 # install_packages.pp
 
-# Install Python 3.8.10
-class { 'python':
-  version => '3.8.10',
+
+exec { 'install_python':
+  command => '/usr/bin/apt-get update && /usr/bin/apt-get install -y software-properties-common && /usr/bin/add-apt-repository ppa:deadsnakes/ppa && /usr/bin/apt-get update && /usr/bin/apt-get install -y python3.8',
+  path    => ['/usr/bin'],
+  user    => 'root',
 }
 
-# Install Flask version 2.1.0 using pip3
 package { 'Flask':
-  ensure          => '2.1.0',
-  provider        => 'pip3',
+  ensure   => '2.1.0',
+  provider => 'pip3',
 }
 
-# Install Werkzeug version 2.1.1 using pip3
 package { 'Werkzeug':
-  ensure          => '2.1.1',
-  provider        => 'pip3',
+  ensure   => '2.1.1',
+  provider => 'pip3',
 }
 
-# Notify the user about the installation
-notify { 'Packages installed':
-  message => 'Python 3.8.10, Flask 2.1.0, and Werkzeug 2.1.1 have been installed.',
-}
+
