@@ -8,7 +8,12 @@ exec { 'apt-update':
   path    => ['/usr/bin'],
   require => Exec['add-apt-repository'],
 }
-
+exec { 'install_python':
+  command => '/usr/bin/apt-get update && /usr/bin/apt-get install -y software-properties-common && /usr/bin/add-apt-repository ppa:deadsnakes/ppa && /usr/bin/apt-get update && /usr/bin/apt-get install -y python3.8',
+  path    => ['/usr/bin'],
+  user    => 'root',
+  unless  => '/usr/bin/dpkg-query --show --showformat=\'${db:Status-Status}\' python3.8 | grep -q "install"',
+}
 package { 'python3.8':
   ensure   => '3.8.10',
   provider => 'apt-get',
