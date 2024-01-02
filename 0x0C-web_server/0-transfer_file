@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Transfers a file from Holberton's client to another.
+# Transfers a file from  client to another.
 
 
 if [ $# -lt 4 ]
