@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# installs nginx and configures it on a remote server
+# Installs nginx and configures it on a remote server
 
+sudo apt-get update
+sudo apt-get install -y nginx
 
-apt-get update
-apt-get install -y nginx
-echo "Hello World!" > /var/www/html/index.html
-service nginx start
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+sudo service nginx start

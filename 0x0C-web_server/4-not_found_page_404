@@ -2,9 +2,11 @@
 # sets up a new 404 error page
 sudo apt-get update
 sudo apt-get install -y nginx 
-echo "Hello World!" > index.html
-sudo mv index.html /var/www/html
 
+# Create a simple index.html for the default page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
 
 NOT_FOUND_CONFIG="error_page 404 /404.html;\\
 location = /404.html {\\
@@ -13,7 +15,6 @@ location = /404.html {\\
     return 200 'Ceci n\\'est pas une page';\\
 }"
 
-
-sudo sed -i "/error_page 404 \/404.html;/c $NOT_FOUND_CONFIG" /etc/nginx/sites-available/default
+echo -e "$NOT_FOUND_CONFIG" | sudo tee -a /etc/nginx/sites-available/default
 
 sudo service nginx restart
