@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Installs and setup haproxy
 
-sudo apt-get -y update
-apt-get -y install haproxy
+apt-get update -y
+apt-get install haproxy -y
 
 # edit config file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 echo "
@@ -12,8 +12,8 @@ echo "
    balance roundrobin
    option httpclose
    option forwardfor
-   server 430875-web-01 18.209.224.89:80 check
+   server 430875-web-01     18.209.224.89:80 check
    server 430875-web-02 	34.227.90.0:80 check
 " | tee -a /etc/haproxy/haproxy.cfg
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+echo "ENABLED=1" |  tee -a /etc/default/haproxy
 service haproxy start

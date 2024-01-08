@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #configure a new server
 
-apt-get -y update
-apt-get -y install nginx
+apt-get  update -y
+apt-get install nginx -y
 ufw allow 'Nginx HTTP'
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo ufw allow 'Nginx HTTP'
+ufw allow 'Nginx HTTP'
 sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
-sudo sed -i "11i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
-sudo service nginx restart
+echo "Ceci n'est pas une page" |  tee /var/www/html/custom_404.html > /dev/null
+sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
+service nginx restart
